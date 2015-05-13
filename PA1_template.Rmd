@@ -25,7 +25,7 @@ unzip("activity.zip")
 data <- read.csv("activity.csv", colClasses = c("integer", "Date", "factor"))
 ```
 
-* Pre-process the date attribute in date column to convert to format
+* Pre-process the date attribute in date column to convert to date format
 ```{r}
 data$month <- as.numeric(format(data$date, "%m"))
 noNA <- na.omit(data)
@@ -38,7 +38,6 @@ summary(noNA)
 ## What is the mean total number of steps taken per day?
 
 * For this part of the assignment, you can ignore the missing values in the dataset.
-
 * Calculate the total number of steps taken per day
 * Make a histogram of the total number of steps taken each day
 ```{r}
@@ -66,7 +65,7 @@ names(avgSteps)[2] <- "meanOfSteps"
 ggplot(avgSteps, aes(interval, meanOfSteps)) + geom_line(color = "steelblue", size = 0.8) + labs(title = "Time Series Plot of the 5-minute Interval", x = "5-minute intervals", y = "Average Number of Steps Taken")
 ```
 
-#### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
+### Which 5-minute interval, on average across all the days in the dataset, contains the maximum number of steps?
 ```{r}
 avgSteps[avgSteps$meanOfSteps == max(avgSteps$meanOfSteps), ]
 ```
@@ -106,7 +105,7 @@ ggplot(newData, aes(date, steps)) + geom_bar(stat = "identity",
                                              width = 0.7) + facet_grid(. ~ month, scales = "free") + labs(title = "Histogram of Total Number of Steps Taken Each Day (no missing data)", x = "Date", y = "Total number of steps")
 ```
 
-#### Do these values differ from the estimates from the first part of the assignment? 
+### Do these values differ from the estimates from the first part of the assignment? 
 
 *  Mean total number of steps taken per day:
 ```{r}
@@ -130,7 +129,7 @@ newMean - oldMean
 newMedian - oldMedian
 ```
 
-#### What is the impact of imputing missing data on the estimates of the total daily number of steps?
+### What is the impact of imputing missing data on the estimates of the total daily number of steps?
 
 * In view of the above comparison, after imputing the missing data, the new mean of total steps taken per day is the same as that of the old mean; the new median of total steps taken per day is greater than that of the old median.
 
@@ -170,6 +169,6 @@ xyplot(avgSteps$meanOfSteps ~ avgSteps$interval | avgSteps$weekdays,
        xlab = "Interval", ylab = "Number of steps")
 ```
 
-#### Conclusion:
+### Conclusion:
 
-#####From the figure above, we can see that weekdays and weekend steps start out simlarly. The difference is that more regular paterns occur in the weekend steps perhaps because people have more time to dedicate to the steps during the weekend as opposed to weekdays, when most people have to go to work or have other obligations. 
+#####From the figure above, we can see that the distribution of the number of steps taken during weekdays and weekend start out simlarly. However, overall they are generally different. The difference is that more regular paterns occur in the weekend steps than during weekdays. This can be explained by the fact that, on average, most people have more time to dedicate to taking steps during the weekend as opposed to weekdays, when most people have to go to work or have other obligations. 
